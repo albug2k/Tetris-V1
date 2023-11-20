@@ -36,10 +36,10 @@ data "aws_subnets" "public" {
 resource "aws_eks_cluster" "example" {
   name     = "EKS_CLOUD"
   role_arn = aws_iam_role.example.arn
-  availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
-
+  
   vpc_config {
-    subnet_ids = data.aws_subnets.public.ids
+    #subnet_ids = data.aws_subnets.public.ids
+    subnet_ids = ["subnet-08355eeaef668baa9", "subnet-0222f3cee133c2d12", "subnet-0f5781354e708c1eb"]
   }
 
   # Ensure that IAM Role permissions are created before and deleted after EKS Cluster handling.
@@ -47,6 +47,13 @@ resource "aws_eks_cluster" "example" {
   depends_on = [
     aws_iam_role_policy_attachment.example-AmazonEKSClusterPolicy,
   ]
+  # Specify multiple availability zones
+  enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
+
+  # Replace this line with the list of availability zones you want to use
+  availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
+
+  depends_on = [aws_eks_fargate_profile.eks_fargate_profile]
 }
 
 resource "aws_iam_role" "example1" {
