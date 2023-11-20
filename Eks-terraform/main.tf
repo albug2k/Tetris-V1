@@ -53,7 +53,6 @@ resource "aws_eks_cluster" "example" {
   # Replace this line with the list of availability zones you want to use
   availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
 
-  depends_on = [aws_eks_fargate_profile.eks_fargate_profile]
 }
 
 resource "aws_iam_role" "example1" {
