@@ -48,10 +48,10 @@ resource "aws_eks_cluster" "example" {
     aws_iam_role_policy_attachment.example-AmazonEKSClusterPolicy,
   ]
   # Specify multiple availability zones
-  enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
+  #enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 
   # Replace this line with the list of availability zones you want to use
-  availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
+  #availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
 
 }
 
